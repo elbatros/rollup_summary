@@ -34,3 +34,5 @@ y m d value
 2016 323
 323
 ```
+
+Please use the input.txt file to change the input for the program

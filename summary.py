@@ -1,11 +1,11 @@
 """
-Saurabh Chopra, 2017.12.18
+Saurabh Chopra, 2017.12.21
 
 Input:
 - input file placed in the repo from where program will read table
 - roll up columns can be provided from command line
-- if the columns from std in is not in the input file table, then it will print Invalid input columns
-example
+- if the arguments from std input does not match columns in the input file table, then it will print Invalid input columns
+Examples below:
     python summary.py y m d
     python summary.py y m
     python summary.py y
@@ -22,16 +22,16 @@ def load_data(filename):
     """
     Will read input.txt file
     :param filename:
-    :return: dataframe object
+    :return: data frame object
     :rtype: DataFrame
     """
     return pd.read_csv(filename, sep=" ", index_col=False)
 
 def create_sets(table_columns):
     """
-    Creates list of list of possible columns prefixes
+    Creates list of possible columns prefixes
     :param table_columns:
-    :return: list of list of possible columns prefixes
+    :return: list of lists of possible columns prefixes
     """
     return [table_columns[i:] for i in range(0, len(table_columns))]
 
@@ -55,13 +55,20 @@ def last_roll_up(columns, sum):
     return last_row
 
 def check_columns(input_columns, df_columns):
+    """
+    Checks if arguments are valid
+    :param input_columns:
+    :param df_columns:
+    :return: True or False
+    :rtype: Bool
+    """
     return len(set(input_columns) - set(df_columns)) == 0
 
 def main():
     result = []
     input_dataframe = load_data(INPUT_FILENAME)
     columns = input_dataframe.columns.tolist()
-
+    # checks if arguments are provided from the terminal
     if len(sys.argv) > 1:
         input_columns = sys.argv[1:]
     else:
@@ -72,6 +79,7 @@ def main():
         return
 
     prefixes = create_sets(input_columns[::-1])
+
     for prefix in prefixes:
         sum = aggregate_rows(input_dataframe, prefix)
         result.append(sum)
