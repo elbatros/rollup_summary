@@ -1,11 +1,13 @@
 ### How do I get set up? ###
 clone the repository it has everything setup with virtual environment
+```
 	cd rollup_summary
 	source venv/bin/activate
 	python summary.py
 	python summary.py y m d
 	python summary.py y m
 	python summary.py y
+```	
 # README #
 
 Summarizing the data helps
@@ -14,6 +16,7 @@ which aggregates a table of data by grouping on every prefix of the list of
 dimensional columns.
 
 For example, if you had some sales data like:
+```
 y m d value
 2016 3 28 100
 2016 3 29 123
@@ -30,4 +33,4 @@ y m d value
 2016 4 50
 2016 323
 323
-
+```
